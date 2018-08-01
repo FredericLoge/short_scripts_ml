@@ -1,4 +1,4 @@
-# > recoding_logreg.R
+# > recoding_logreg.R (blabla)
 # - recoding logistic regression with application on the IRIS dataset
 
 # > recoding_lda.R
