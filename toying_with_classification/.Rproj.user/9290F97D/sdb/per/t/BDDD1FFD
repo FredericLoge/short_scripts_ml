@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# function returning minus the log-likelihood in the logit model\nfoo <- function(beta, y, x){\n  ll <- sum(y*(x %*% beta) - log(1+exp(x %*% beta))) \n  return(-ll)\n}\n\n# get iris data\ndf <- iris[iris$Species %in% c('versicolor', 'virginica'),]\nx <- cbind('Intercept'=1, as.matrix(df[,c('Sepal.Length', 'Sepal.Width', 'Petal.Length')]))\ny <- 1*(df[,c('Species')] == 'virginica')\n\n# find optimal beta\nbeta0 <- rep(0, ncol(x))\nfoo(beta = beta0, y=y, x=x)\nopt <- optim(par = beta0, fn = foo, y = y, x = x)\nopt\n\n# compute probability estimate\nxbeta <- x %*% opt$par\npred_virginica <- exp(xbeta) / (1 + exp(xbeta))\n\n# confusion matrix\ntable(y, 1*(pred_virginica > 0.5))\n\n# compute ROC curve\ncompute_roc <- function(y, yhat){\n  seuils <- seq(0, 1, by = 0.01)\n  coords <- array(data = NA, dim = c(length(seuils)+1, 2))\n  for(i in 1:length(seuils)){\n    pred <- 1*(yhat >= seuils[i])\n    coords[i,1] <- sum(pred==1 & y==1)/sum(y==1)\n    coords[i,2] <- sum(pred==1 & y==0)/sum(y==0)\n  }\n  coords[length(seuils)+1,] <- c(0,0)\n  return(coords)\n}\n\n# compute and plot ROC\nmyRoc <- compute_roc(y = y, yhat = pred_virginica)\nplot(y = myRoc[,1], x = myRoc[,2], xlab = 'False Positive Rate', ylab = 'True Positive Rate',\n        main = 'ROC curve', type = 'l', pch = 20)\nsegments(x0 = 0, y0 = 0, x1 = 1, y1 = 1, lty = 2)\n\n# plot sigmoid with colored points\ncolor_vector <- c('blue', 'orange')\nplot(y = pred_virginica, x = xbeta, col = as.character(factor(x = y, levels = c(0,1), labels = color_vector)), \n     pch = 20, xlab = expression(paste('x', beta)),\n     ylab = expression(paste(exp,'(x', beta,') / (1 +', exp, '(x', beta, '))')),\n     main = expression(paste('Prob(Species = Virginica) vs x', beta, ' with real species colored')))\nlegend('bottomright', legend = c('versicolor', 'virginica'), col = color_vector,\n       pch = 20, xpd = TRUE, border = NA, bg = 'yellow', box.col = NA, cex = 2)\n\n",
+    "created" : 1533035393967.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1119357364",
+    "id" : "BDDD1FFD",
+    "lastKnownWriteTime" : 1533037627,
+    "last_content_update" : 1533037627281,
+    "path" : "~/Documents/singlecode/nour_exed/recoding_logreg.R",
+    "project_path" : "recoding_logreg.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

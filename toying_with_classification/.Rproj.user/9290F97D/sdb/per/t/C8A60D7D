@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# > recoding_logreg.R\n# - recoding logistic regression with application on the IRIS dataset\n\n# > recoding_lda.R\n# - recoding LDA with application on simulated data -> shows on the IRIS dataset\n# how to do a projection on a subspace in a supervised way\n\n# > iris_dataset.R\n# - easy problem\n# - methods: Logistic regression / LDA / KNN\n# - LR works fine, so do the others\n# - PCA allows to summarize the space by conserving a large amount of variance,\n# but deteriorates heavily our performance capabilities\n\n## régression logistique : tests d'hypothese sur les coefficients / ou sur un ensemble de coeff\n",
+    "created" : 1533035444646.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2139935207",
+    "id" : "C8A60D7D",
+    "lastKnownWriteTime" : 1533041835,
+    "last_content_update" : 1533041835724,
+    "path" : "~/Documents/singlecode/nour_exed/readme.R",
+    "project_path" : "readme.R",
+    "properties" : {
+        "tempName" : "Untitled3"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
